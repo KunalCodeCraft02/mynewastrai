@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F2B51D">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.8.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="loader">
+    <div class="loderdiv">
+         <h2>Welcome to <span>ASTRAI</span></h2> 
+       
+    </div>
+  </div>
+  <div id="menuDiv" class="menu">
+   <div class="links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/Api">API</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </div>
+  </div>
+  <main>
+    <nav>
+      <div class="logo">
+        <h2>ASTRAI</h2>
+      </div>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/Api">API</a></li>
+        <li><a href="/contact">Contact</a></li>
+
+        <i id="menuLabel" class="ri-menu-line"></i>
+      </ul>
+    </nav>
+    <div class="formdiv">
+      <form id="aiForm">
+        <input type="text" id="prompt" placeholder="Ask something..." required /> <br>
+        <button type="submit">Generate <i class="ri-lightbulb-flash-fill"></i></button>
+      </form>
+    </div>
+
+    <div class="outputparent">
+      <div class="chatsection">
+        <div class="outputdiv" id="chatContainer"></div>
+      </div>
+
+
+    </div>
+
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
+    integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <script>
+    const form = document.getElementById("aiForm");
+    const chatContainer = document.getElementById("chatContainer");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const input = document.getElementById("prompt");
+      const prompt = input.value;
+
+
+      const userWrapper = document.createElement("div");
+      userWrapper.className = "chat user";
+
+      const userMessage = document.createElement("p");
+      userMessage.className = "inputuser";
+      userMessage.innerHTML = `<span>You:</span> ${prompt}`;
+
+      userWrapper.appendChild(userMessage);
+      chatContainer.appendChild(userWrapper);
+
+      input.value = "";
+
+
+      const thinkingWrapper = document.createElement("div");
+      thinkingWrapper.className = "chat ai";
+
+      const thinkingMessage = document.createElement("p");
+      thinkingMessage.className = "aioutput thinking";
+      thinkingMessage.innerHTML = `<span>AI:</span> Thinking...`;
+
+      thinkingWrapper.appendChild(thinkingMessage);
+      chatContainer.appendChild(thinkingWrapper);
+
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+
+
+      try {
+        const res = await fetch("/api/ai/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt })
+        });
+
+        const data = await res.json();
+
+
+        thinkingMessage.classList.remove("thinking");
+        thinkingMessage.innerHTML = `<span>AI:</span> ${marked.parse(data.response)}`;
+
+      } catch (error) {
+        thinkingMessage.classList.remove("thinking");
+        thinkingMessage.innerHTML = `<span>AI:</span> Error generating response`;
+      }
+
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    });
+
+
+      const menuLabel = document.getElementById("menuLabel");
+      const menuDiv = document.getElementById("menuDiv");
+      let flag = 0;
+
+      menuLabel.addEventListener("click", () => {
+        if(flag == 0){
+          gsap.to(menuDiv,{
+            top:"14%",
+            durattion:0.5,
+            ease:"power2.inOut"
+          });
+          flag = 1;
+        }
+        else{
+          gsap.to(menuDiv,{
+            top:"-150%",
+            durattion:0.5,
+            ease:"power2.inOut"
+          });
+          flag = 0;
+        }
+      });
+
+
+      let loaderdiv = document.getElementById("#loader");
+      let loader = document.querySelector("#loader h2");
+
+      // console.log(loader);
+      let tl = gsap.timeline();
+
+      tl.from(loader,{
+        x:50,
+        duration:0.8,
+        opacity:0,
+        ease:"power2.inOut",
+      })
+      tl.to("#loader",{
+        x:"-100%",
+        duration:1,
+        // delay:1,
+        ease:"power2.inOut",
+      })
+
+
+  </script>
+
+
+</body>
+
+</html>

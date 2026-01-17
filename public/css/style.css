@@ -1,0 +1,321 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Smooch+Sans:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Macondo&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Smooch+Sans:wght@100..900&display=swap');
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #27272A;
+  font-family: Roboto;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5vw 3vw;
+}
+
+nav i {
+  display: none;
+}
+
+.menu {
+  display: none;
+}
+
+nav .logo h2 {
+  font-size: 2vw;
+  font-family: Anton;
+  letter-spacing: 0.1vw;
+  font-weight: 500;
+}
+
+nav ul label {
+  display: none;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: 3vw;
+
+}
+#loader{
+  display: none;
+}
+
+ul li {
+  list-style-type: none;
+  font-size: 1.2vw;
+}
+
+.formdiv {
+  min-height: 45vh;
+  width: 100%;
+  /* background-color: aliceblue; */
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  /* flex-direction: column; */
+}
+
+.formdiv #prompt {
+  height: 3vw;
+  width: 35vw;
+  border-radius: 2.2rem;
+  padding: 0.7vw 1.2vw;
+  font-size: 1.4vw;
+  /* text-align: center; */
+  border: none;
+  outline: none;
+  font-family: Montserrat;
+  font-weight: 500;
+
+}
+
+.formdiv button {
+  /* height: 4vw; */
+  border-radius: 2.2rem;
+  padding: 0.9vw 1.2vw;
+  font-size: 1.2vw;
+  /* text-align: center; */
+  border: none;
+  outline: none;
+  margin-top: 1.5vw;
+  margin-left: 14vw;
+  cursor: pointer;
+}
+
+
+.outputparent {
+  min-height: 40vh;
+  width: 100%;
+  /* background-color: aquamarine; */
+  margin-top: 2vw;
+
+}
+
+.outputparent .chatsection {
+  min-height: 50vh;
+  width: 60%;
+  margin: auto;
+  /* background-color: #fff; */
+  padding-right: 2vw;
+  padding-top: 2vw;
+  font-family: Montserrat;
+
+}
+
+#chatContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vw;
+}
+
+.chat {
+  display: flex;
+  width: 100%;
+}
+
+.chat.user {
+  justify-content: flex-end;
+}
+
+.chat.ai {
+  justify-content: flex-start;
+}
+
+.inputuser,
+.aioutput {
+  max-width: 70%;
+  padding: 1vw 1.2vw;
+  border-radius: 1rem;
+  font-size: 1.2vw;
+  line-height: 1.6;
+}
+
+.inputuser {
+  background-color: #3f3f46;
+  text-align: right;
+}
+
+.aioutput {
+  background-color: #e5e7eb;
+  color: black;
+  text-align: left;
+}
+
+.inputuser span,
+.aioutput span {
+  font-weight: 600;
+  margin-right: 0.5vw;
+}
+
+.thinking {
+  font-style: italic;
+  opacity: 0.7;
+  animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.3;
+  }
+}
+
+
+
+@media (max-width:500px) {
+  nav {
+    padding: 3vw 4vw;
+  }
+
+  nav .logo h2 {
+    font-size: 8vw;
+  }
+
+  nav ul {
+    align-items: center;
+  }
+
+  nav ul li {
+    display: none;
+
+  }
+
+  nav i {
+    display: block;
+    font-size: 7vw;
+  }
+
+  nav ul label {
+    display: block;
+    font-size: 4vw;
+    cursor: pointer;
+  }
+
+  #loader{
+    height: 100vh;
+    width: 100%;
+    display: block;
+    position: absolute;
+    z-index: 50;
+    background-color: black;
+    color: white;
+    font-family: Montserrat;
+    display: flex;
+    justify-content: center;
+    align-items:flex-start;
+  }
+  .loderdiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 88vh;
+    width: 100%;
+    /* background-color: aqua; */
+  }
+  .loderdiv h2 span{
+    color: #F2B51D;
+    /* font-family: Anton; */
+  }
+
+
+
+
+  .menu {
+    display: block;
+    position: fixed;
+    top: -150%;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    background: #1f1f1f;
+    z-index: 12;
+  }
+
+
+  .menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+  }
+
+  .menu .links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 25px;
+    list-style: none;
+  }
+
+
+  .formdiv {
+    min-height: 30vh;
+  }
+
+  .formdiv #prompt {
+    height: 11vw;
+    width: 75vw;
+    border-radius: 2.2rem;
+    padding: 1.7vw 3vw;
+    font-size: 3.4vw;
+    /* text-align: center; */
+    border: none;
+    outline: none;
+    font-family: Montserrat;
+    font-weight: 500;
+  }
+
+  .formdiv button {
+    /* height: 4vw; */
+    border-radius: 2.2rem;
+    padding: 4vw 9.2vw;
+    font-size: 3.5vw;
+    /* text-align: center; */
+    border: none;
+    outline: none;
+    margin-top: 3vw;
+    margin-left: 21vw;
+    cursor: pointer;
+}
+.inputuser, .aioutput {
+    max-width: 70%;
+    padding: 3vw 5.2vw;
+    border-radius: 1rem;
+    font-size: 3.2vw;
+    line-height: 1.6;
+}
+.outputparent {
+   
+    margin-top: 10vw;
+}
+
+.outputparent .chatsection {
+  
+    width: 90%;
+}
+
+.aioutput {
+        max-width: 90%;
+}
+}
