@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 
-// Connect DB ONCE
+
 connectDB();
 
 app.use(express.json());
@@ -40,5 +40,5 @@ app.get("/otpvalidator", (req, res) => {
   res.render("otpvalidator", { email, error: null });
 });
 
-// 🔥 IMPORTANT
+
 module.exports = app;
