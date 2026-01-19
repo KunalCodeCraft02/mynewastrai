@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/otpvalidator.css">
+  <title>OTP Verification</title>
+</head>
+<body>
+  <main>
+    <div class="form-container">
+      <form method="POST" action="/api/ai/verifyotp" class="form">
+
+        
+        <input type="hidden" name="email" value="<%= email %>">
+
+        <div class="input-group">
+          <label>OTP</label>
+          <input type="number" name="otp" required>
+        </div>
+
+        <button class="sign" type="submit">Verify</button>
+
+        <% if (error) { %>
+          <p style="color:red"><%= error %></p>
+        <% } %>
+
+      </form>
+    </div>
+  </main>
+</body>
+</html>
