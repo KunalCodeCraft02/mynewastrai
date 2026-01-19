@@ -40,7 +40,7 @@ router.post("/signup", async (req, res) => {
                 <body>
                     <script>
                         alert("User already exists!");
-                        window.location.href = "/userlogin";
+                        window.location.href = "/login";
                     </script>
                 </body>
                 </html>
