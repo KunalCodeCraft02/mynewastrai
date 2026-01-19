@@ -91,7 +91,7 @@ router.post("/signup", async (req, res) => {
                 <body>
                     <script>
                         alert("Ragistration Failed!");
-                        window.location.href = "/userlogin";
+                        window.location.href = "/login";
                     </script>
                 </body>
                 </html>
