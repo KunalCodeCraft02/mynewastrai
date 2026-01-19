@@ -1,10 +1,10 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
-const databaseconntection = require("./config/databaseconnection");
 const user = require("./models/user");
 const cookieParser = require("cookie-parser");
 const isLoggedin = require("./middleware/auth");
+const connectDB = require("./config/databaseconnection");
 dotenv.config();
 
 
@@ -46,8 +46,13 @@ app.get("/otpvalidator", (req, res) => {
 
 
 
+const startServer = async () => {
+  await connectDB(); 
 
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+};
 
-app.listen(3000, () => {
-  console.log("✅ Server running on http://localhost:3000");
-});
+startServer();
