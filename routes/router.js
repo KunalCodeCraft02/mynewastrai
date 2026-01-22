@@ -133,70 +133,57 @@ router.post("/verifyotp", async (req, res) => {
 
 router.post("/loginuser", async (req, res) => {
   try {
-    const { email , password } = req.body;
+    const { email, password } = req.body;
 
-    let user = await User.findOne({ email: req.body.email });
-    console.log(user);
+    const user = await User.findOne({ email });
+
     if (!user) {
       return res.send(`
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Login Error</title>
-                </head>
-                <body>
-                    <script>
-                        alert("User not found!");
-                        window.location.href = "/login";
-                    </script>
-                </body>
-                </html>
-            `);
+        <script>
+          alert("User not found!");
+          window.location.href="/login";
+        </script>
+      `);
     }
-    else {
-      if (user.password !== req.body.password) {
-        return res.send(`
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Login Error</title>
-                </head>
-                <body>
-                    <script>
-                        alert("Invalid password!");
-                        window.location.href = "/login";
-                    </script>
-                </body>
-                </html>
-            `);
-      }
-      else{
-         let token = jwt.sign({ email: user.email, userid: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' }); 
-        res.cookie("token", token);
-        console.log(token);
-        res.redirect("/");
-      }
 
+    if (!user.isVerified) {
+      return res.send(`
+        <script>
+          alert("Please verify OTP before login");
+          window.location.href="/login";
+        </script>
+      `);
     }
-  }
 
-  catch (error) {
+   
+    if (user.password !== password) {
+      return res.send(`
+        <script>
+          alert("Invalid password!");
+          window.location.href="/login";
+        </script>
+      `);
+    }
+
+    const token = jwt.sign(
+      { email: user.email, userid: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.cookie("token", token, { httpOnly: true });
+    res.redirect("/");
+
+  } catch (error) {
+    console.error(error);
     return res.send(`
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Login Error</title>
-                </head>
-                <body>
-                    <script>
-                        alert("Login Failed!");
-                        window.location.href = "/login";
-                    </script>
-                </body>
-                </html>
-            `);
+      <script>
+        alert("Login Failed!");
+        window.location.href="/login";
+      </script>
+    `);
   }
-})
+});
 
 
 
